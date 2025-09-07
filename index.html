@@ -503,17 +503,17 @@
                 alert('الرجاء إدخال البريد الإلكتروني وكلمة المرور');
                 return;
             }
-            // هنا يمكنك استبدال alert بإرسال إلى باك-إند عبر fetch/ajax
+            
             alert('تم تسجيل الدخول (اختبار فقط)');
-            // إغلاق المودال
+           
             const modalEl = document.getElementById('loginModal');
             const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
             modal.hide();
-            // خيار: إعادة تعيين الفورم
+           
             this.reset();
         });
 
-        // Register submit: تحقق من تطابق كلمتي المرور
+        // تحقق من تطابق كلمتي المرور
         document.getElementById('registerForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const pw = document.getElementById('registerPassword').value;
