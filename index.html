@@ -1,0 +1,538 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>كهـرمان الفضة</title>
+
+    <!-- Bootstrap CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --gold: #b38e5d;
+            --gold-dark: #9c784c;
+            --dark: #111;
+            --muted: #6c757d;
+            --modal-bg: #f8f9fa;
+        }
+
+        body {
+            background-color: #fdfdfd;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #fff;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .navbar-brand i {
+            color: var(--gold);
+        }
+
+        .nav-link {
+            color: var(--dark) !important;
+            font-weight: 500;
+        }
+
+            .nav-link.active, .nav-link:hover {
+                color: var(--gold) !important;
+            }
+
+        /* Hero */
+        .hero-card {
+            border: 1px solid #e6e6e6;
+            border-radius: 15px;
+            padding: 50px 30px;
+            background: #fff;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        }
+
+            .hero-card h1 {
+                color: var(--dark);
+            }
+
+            .hero-card p {
+                color: var(--muted);
+            }
+
+        /* Buttons */
+        .btn-gold {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #fff;
+        }
+
+            .btn-gold:hover {
+                background: var(--gold-dark);
+                border-color: var(--gold-dark);
+                color: #fff;
+            }
+
+        .btn-dark {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        .btn-outline-dark {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+            .btn-outline-dark:hover {
+                background: var(--gold);
+                color: #fff;
+            }
+
+        /* Cards / Products */
+        .card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform .22s ease, box-shadow .22s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+            }
+
+        .card-img-top {
+            object-fit: cover;
+            height: 320px;
+            width: 100%;
+            display: block;
+        }
+
+        @media (max-width: 576px) {
+            .card-img-top {
+                height: 220px;
+            }
+
+            .hero-card {
+                padding: 30px 18px;
+            }
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--gold);
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        .text-gold {
+            color: var(--gold) !important;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        /* Modals: header gold, body light gray */
+        .modal-content {
+            border-radius: 14px;
+            background-color: var(--modal-bg);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: var(--gold);
+            color: #fff;
+            border-bottom: none;
+            padding: 14px 18px;
+        }
+
+        .modal-title {
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .modal-body {
+            padding: 18px;
+        }
+
+        .modal-footer {
+            background: transparent;
+            border-top: none;
+            padding: 12px 18px;
+        }
+
+        /* white close icon on gold header */
+        .btn-close.btn-close-white {
+            filter: invert(1) brightness(2) saturate(0);
+        }
+
+        /* modal slide-in animation (subtle) */
+        .modal.fade .modal-dialog {
+            transform: translateY(18px);
+            transition: transform .28s ease-out;
+        }
+
+        .modal.show .modal-dialog {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="bi bi-star-fill"></i> كهـرمان الفضة</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="تبديل القائمة">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">من نحن</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">المنتجات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">تواصل</a></li>
+                </ul>
+
+                <div class="d-flex ms-3 gap-2 mt-2 mt-lg-0">
+                    <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#loginModal">تسجيل الدخول</a>
+                    <a href="#" class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#registerModal">إنشاء حساب</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="container my-5">
+        <div class="hero-card text-center">
+            <span class="badge bg-white text-dark mb-3"><i class="bi bi-shield-check text-gold"></i> فضة عيار 925 أصلية مع ضمان</span>
+            <h1 class="fw-bold mb-3">أناقة خالدة بلمعة الفضة</h1>
+            <p class="text-muted mb-4">تشكيلة فاخرة من الخواتم والسلاسل والأساور المصنوعة بعناية، مع توصيل سريع وخدمة تغليف هدايا.</p>
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <a href="#products" class="btn btn-dark btn-custom"><i class="bi bi-bag"></i> تصفح المنتجات</a>
+                <a href="#contact" class="btn btn-outline-dark btn-custom"><i class="bi bi-telephone"></i> تواصل معنا</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- من نحن -->
+    <section id="about" class="container my-5">
+        <div class="row align-items-center g-4">
+            <div class="col-md-4 d-flex flex-wrap justify-content-center gap-3">
+                <img src="img/photo_2025-08-23_14-46-16.jpg" class="img-fluid rounded shadow-sm" style="max-width:180px;" alt="صورة 1">
+                <img src="img/photo_2025-08-23_14-46-19.jpg" class="img-fluid rounded shadow-sm" style="max-width:180px;" alt="صورة 2">
+            </div>
+
+            <div class="col-md-8">
+                <h2 class="fw-bold mb-3">من نحن</h2>
+                <p class="text-muted mb-4">
+                    شركة كهرمان الفضة متخصصة في بيع الفضة عيار 925 بتصاميم عصرية وكلاسيكية تناسب جميع الأذواق.
+                </p>
+
+                <div class="mb-3 d-flex align-items-start">
+                    <div class="icon bg-white rounded-circle p-2 me-2"><i class="bi bi-shield-check text-gold"></i></div>
+                    <div>
+                        <h6 class="fw-bold mb-1">ضمان الجودة</h6>
+                        <p class="text-muted small mb-0">استرجاع خلال 7 أيام على المشتريات عبر الإنترنت.</p>
+                    </div>
+                </div>
+
+                <div class="mb-3 d-flex align-items-start">
+                    <div class="icon bg-white rounded-circle p-2 me-2"><i class="bi bi-truck text-gold"></i></div>
+                    <div>
+                        <h6 class="fw-bold mb-1">توصيل سريع</h6>
+                        <p class="text-muted small mb-0">توصيل خلال 24-48 ساعة داخل المدينة.</p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <button class="btn btn-outline-dark">اطلب تصميماً خاصاً</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- المنتجات -->
+    <section id="products" class="container my-5">
+        <h4 class="mb-4 text-center fw-bold">تشكيلة المنتجات</h4>
+        <div class="row g-4">
+            <!-- منتج 1 -->
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card h-100">
+                    <img src="img/photo_2025-08-24_16-24-49.jpg" class="card-img-top" alt="تعليقة فضة">
+                    <div class="card-body">
+                        <h5 class="card-title">تعليقة فضة</h5>
+                        <p class="card-text text-muted">تصميم كلاسيكي أنيق.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <span class="text-gold">165 د.ل</span>
+                        <button class="btn btn-dark btn-sm">شراء 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- منتج 2 -->
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card h-100">
+                    <img src="img/photo_2025-08-24_16-24-46.jpg" class="card-img-top" alt="سيت فضة نسائية">
+                    <div class="card-body">
+                        <h5 class="card-title">سيت فضة نسائية</h5>
+                        <p class="card-text text-muted">عيار 925 - طلاء روديوم - مقاوم للسواد.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <span class="text-gold">150 د.ل</span>
+                        <button class="btn btn-dark btn-sm">شراء 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- منتج 3 -->
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card h-100 position-relative">
+                    <span class="discount-badge">%10 خصم</span>
+                    <img src="img/photo_2025-08-23_14-46-16.jpg" class="card-img-top" alt="تاكم فضة">
+                    <div class="card-body">
+                        <h5 class="card-title">تاكم فضة</h5>
+                        <p class="card-text text-muted">عيار 925 • وزن 12 جم • متوفر مقاسات.</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <span class="text-gold">180 د.ل</span>
+                        <button class="btn btn-dark btn-sm">شراء 🛒</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- لماذا تختارنا -->
+    <section class="container my-5">
+        <div class="text-center mb-4">
+            <h3 class="fw-bold">لماذا تختارنا</h3>
+        </div>
+        <div class="row g-4">
+            <div class="col-6 col-md-3">
+                <div class="card h-100 shadow-sm text-center p-3">
+                    <div class="mb-3"><i class="bi bi-headset fs-2 text-gold"></i></div>
+                    <h5 class="fw-bold">خدمة عملاء</h5>
+                    <p class="text-muted small">دعم عبر واتساب والهاتف يومياً من 10 ص إلى 10 م.</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card h-100 shadow-sm text-center p-3">
+                    <div class="mb-3"><i class="bi bi-box-seam fs-2 text-gold"></i></div>
+                    <h5 class="fw-bold">تغليف هدايا</h5>
+                    <p class="text-muted small">تغليف فاخر وبطاقة إهداء مجانية عند الطلب.</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card h-100 shadow-sm text-center p-3">
+                    <div class="mb-3"><i class="bi bi-cash-coin fs-2 text-gold"></i></div>
+                    <h5 class="fw-bold">أسعار منافسة</h5>
+                    <p class="text-muted small">تخفيضات موسمية وتسعير عادل.</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card h-100 shadow-sm text-center p-3">
+                    <div class="mb-3"><i class="bi bi-gem fs-2 text-gold"></i></div>
+                    <h5 class="fw-bold">فضة موثقة</h5>
+                    <p class="text-muted small">جميع القطع مختومة 925 مع فاتورة توضح الوزن والعيار.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تواصل معنا -->
+    <section id="contact" class="container my-5">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-5">
+                <h4 class="fw-bold mb-3">تواصل معنا</h4>
+                <p class="text-muted">املأ النموذج أو راسلنا مباشرة عبر واتساب. سنرد خلال ساعات العمل.</p>
+                <ul class="list-unstyled mb-4">
+                    <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>طرابلس, ليبيا </li>
+                    <li class="mb-2"><i class="bi bi-telephone me-2"></i> 091-5383330</li>
+                    <li class="mb-2"><i class="bi bi-envelope me-2"></i> info@khraman.silver.ly</li>
+                    <li class="mb-2"><i class="bi bi-clock me-2"></i> يومياً 10:00 ص – 10:00 م</li>
+                </ul>
+                <a href="https://wa.me/0915383330" class="btn btn-success"><i class="bi bi-whatsapp me-2"></i>مراسلة واتساب</a>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="card shadow-sm p-4 rounded-4">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">الاسم الكامل</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">رقم الهاتف</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" placeholder="example@mail.com" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">الرسالة</label>
+                            <textarea class="form-control" rows="4"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100"><i class="bi bi-send me-2"></i>إرسال</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-3 mt-5">
+        <p class="mb-0">© 2025 شركة كهـرمان الفضة. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <!-- MODALS -->
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">تسجيل الدخول</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="example@mail.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">كلمة المرور</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="••••••" required>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">تذكرني</label>
+                            </div>
+                            <a href="#" class="small text-decoration-none">نسيت كلمة المرور؟</a>
+                        </div>
+                        <button type="submit" class="btn btn-gold w-100">دخول</button>
+                    </form>
+                </div>
+                <div class="modal-footer text-center d-block">
+                    <p class="mb-0">
+                        ليس لديك حساب؟
+                        <a href="#" class="text-decoration-none text-gold" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">إنشاء حساب</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">إنشاء حساب جديد</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label for="registerName" class="form-label">الاسم الكامل</label>
+                            <input type="text" class="form-control" id="registerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="registerEmail" placeholder="example@mail.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">كلمة المرور</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerConfirm" class="form-label">تأكيد كلمة المرور</label>
+                            <input type="password" class="form-control" id="registerConfirm" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-text">بتسجيلك أنت توافق على شروطنا وسياسة الخصوصية.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-gold w-100">إنشاء حساب</button>
+                    </form>
+                </div>
+                <div class="modal-footer text-center d-block">
+                    <p class="mb-0">
+                        لديك حساب بالفعل؟
+                        <a href="#" class="text-decoration-none text-gold" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">تسجيل الدخول</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS: validation + auto-close modals (اختبار محلي) -->
+    <script>
+        // Login submit (اختبار محلي)
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const pw = document.getElementById('loginPassword').value.trim();
+            if (!email || !pw) {
+                alert('الرجاء إدخال البريد الإلكتروني وكلمة المرور');
+                return;
+            }
+            // هنا يمكنك استبدال alert بإرسال إلى باك-إند عبر fetch/ajax
+            alert('تم تسجيل الدخول (اختبار فقط)');
+            // إغلاق المودال
+            const modalEl = document.getElementById('loginModal');
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            modal.hide();
+            // خيار: إعادة تعيين الفورم
+            this.reset();
+        });
+
+        // Register submit: تحقق من تطابق كلمتي المرور
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const pw = document.getElementById('registerPassword').value;
+            const pw2 = document.getElementById('registerConfirm').value;
+            if (pw.length < 6) {
+                alert('كلمة المرور يجب أن تكون 6 أحرف على الأقل');
+                return;
+            }
+            if (pw !== pw2) {
+                alert('كلمتا المرور غير متطابقتين');
+                return;
+            }
+            // هنا ترسل البيانات إلى الخادم
+            alert('تم إنشاء الحساب (اختبار فقط)');
+            const modalEl = document.getElementById('registerModal');
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            modal.hide();
+            this.reset();
+        });
+    </script>
+</body>
+</html>
