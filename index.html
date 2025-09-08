@@ -25,6 +25,75 @@
             -webkit-font-smoothing: antialiased;
         }
 
+            /* 🌙 DARK MODE */
+            body.dark-mode {
+                background-color: #121212;
+                color: #e4e4e4;
+            }
+
+                body.dark-mode .navbar {
+                    background: #1c1c1c;
+                    border-bottom: 2px solid var(--gold);
+                }
+
+                body.dark-mode .nav-link {
+                    color: #eee !important;
+                }
+
+                    body.dark-mode .nav-link.active,
+                    body.dark-mode .nav-link:hover {
+                        color: var(--gold) !important;
+                    }
+
+                body.dark-mode .hero-card {
+                    background: #1c1c1c;
+                    border-color: #333;
+                    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+                }
+
+                body.dark-mode .card {
+                    background: #1e1e1e;
+                    color: #eee;
+                }
+
+                body.dark-mode .card-footer {
+                    background: #252525;
+                }
+
+                body.dark-mode footer {
+                    background: #000;
+                    color: #aaa;
+                }
+
+                body.dark-mode .modal-content {
+                    background-color: #1e1e1e;
+                    color: #fff;
+                }
+
+                body.dark-mode .form-control {
+                    background-color: #2a2a2a;
+                    border-color: #444;
+                    color: #fff;
+                }
+
+                    body.dark-mode .form-control:focus {
+                        background-color: #2f2f2f;
+                        border-color: var(--gold);
+                        color: #fff;
+                    }
+
+        /* زر الوضع الليلي */
+        .btn-toggle {
+            border: none;
+            background: transparent;
+            color: var(--gold);
+            font-size: 1.3rem;
+        }
+
+            .btn-toggle:hover {
+                color: var(--gold-dark);
+            }
+
         /* Navbar */
         .navbar {
             background: #fff;
@@ -90,7 +159,7 @@
                 color: #fff;
             }
 
-        /* Cards / Products */
+        /* Cards */
         .card {
             border: none;
             border-radius: 12px;
@@ -143,7 +212,7 @@
             font-size: 14px;
         }
 
-        /* Modals: header gold, body light gray */
+        /* Modals */
         .modal-content {
             border-radius: 14px;
             background-color: var(--modal-bg);
@@ -172,12 +241,10 @@
             padding: 12px 18px;
         }
 
-        /* white close icon on gold header */
         .btn-close.btn-close-white {
             filter: invert(1) brightness(2) saturate(0);
         }
 
-        /* modal slide-in animation (subtle) */
         .modal.fade .modal-dialog {
             transform: translateY(18px);
             transition: transform .28s ease-out;
@@ -188,9 +255,8 @@
         }
 
         .card-img-top {
-        object-fit:cover;
+            object-fit: fill;
         }
-
     </style>
 </head>
 <body>
@@ -214,12 +280,18 @@
                 </ul>
 
                 <div class="d-flex ms-3 gap-2 mt-2 mt-lg-0">
+                    <!-- زر الوضع الليلي -->
+                    <button id="toggleDark" class="btn-toggle" title="تبديل الوضع"><i class="bi bi-moon-fill"></i></button>
                     <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#loginModal">تسجيل الدخول</a>
                     <a href="#" class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#registerModal">إنشاء حساب</a>
                 </div>
             </div>
         </div>
     </nav>
+    <!-- زر اللغة -->
+    <div>
+    <button id="toggleLang" class="btn-toggle" title="Change Language"><i class="bi bi-translate"></i></button>
+    </div>
 
     <!-- Hero -->
     <section class="container my-5">
@@ -372,7 +444,7 @@
                     <li class="mb-2"><i class="bi bi-envelope me-2"></i> info@khraman.silver.ly</li>
                     <li class="mb-2"><i class="bi bi-clock me-2"></i> يومياً 10:00 ص – 10:00 م</li>
                 </ul>
-                <a href="https://wa.me/0915383330" class="btn btn-success"><i class="bi bi-whatsapp me-2"></i>مراسلة واتساب</a>
+                <a href="https://wa.me/0915383330" class="btn btn-success"><i class="bi bi-whatsapp me-2"></i> مراسلة واتساب</a>
             </div>
 
             <div class="col-lg-7">
@@ -508,13 +580,13 @@
                 alert('الرجاء إدخال البريد الإلكتروني وكلمة المرور');
                 return;
             }
-            
+
             alert('تم تسجيل الدخول (اختبار فقط)');
-           
+
             const modalEl = document.getElementById('loginModal');
             const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
             modal.hide();
-           
+
             this.reset();
         });
 
@@ -539,5 +611,54 @@
             this.reset();
         });
     </script>
+    <script>
+        const toggleBtn = document.getElementById("toggleDark");
+        const body = document.body;
+
+        // إذا كان مخزن في localStorage
+        if (localStorage.getItem("darkMode") === "true") {
+            body.classList.add("dark-mode");
+            toggleBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
+        }
+
+        toggleBtn.addEventListener("click", () => {
+            body.classList.toggle("dark-mode");
+            const isDark = body.classList.contains("dark-mode");
+            localStorage.setItem("darkMode", isDark);
+            toggleBtn.innerHTML = isDark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-fill"></i>';
+        });
+    </script>
+    <script>
+        // وظيفة تغيير اللغة
+        function setLanguage(lang) {
+            document.getElementById("brand").textContent = texts[lang].brand;
+            document.getElementById("nav-home").textContent = texts[lang].home;
+            document.getElementById("nav-about").textContent = texts[lang].about;
+            document.getElementById("nav-products").textContent = texts[lang].products;
+            document.getElementById("nav-contact").textContent = texts[lang].contact;
+            document.getElementById("hero-title").textContent = texts[lang].heroTitle;
+            document.getElementById("hero-text").textContent = texts[lang].heroText;
+            document.getElementById("footer-text").textContent = texts[lang].footer;
+
+            // تغيير اتجاه الصفحة
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+            localStorage.setItem("lang", lang);
+        }
+
+        // تحميل اللغة المخزنة
+        const savedLang = localStorage.getItem("lang") || "ar";
+        setLanguage(savedLang);
+
+        // تبديل اللغة عند الضغط
+        langBtn.addEventListener("click", () => {
+            const currentLang = localStorage.getItem("lang") || "ar";
+            const newLang = currentLang === "ar" ? "en" : "ar";
+            setLanguage(newLang);
+        });
+
+    </script>
+
 </body>
 </html>
